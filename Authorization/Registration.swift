@@ -13,6 +13,7 @@ import CoreData
 class Registration: UIViewController {
     
     var tableItems: [Table] = []
+    
 
     @IBOutlet var fieldRegistrationName: UITextField!
 
@@ -34,8 +35,8 @@ class Registration: UIViewController {
         
         let appDelegate = UIApplication.shared.delegate as! AppDelegate
         let context = appDelegate.persistentContainer.viewContext
-        //       let entity = NSEntityDescription.entity(forEntityName: "Table", in: context)
-        //    _ = NSManagedObject(entity: entity!, insertInto: context) as! Table
+              let entity = NSEntityDescription.entity(forEntityName: "Table", in: context)
+        let tableObject = NSManagedObject(entity: entity!, insertInto: context) as! Table
         let fetchRequest: NSFetchRequest<Table> = Table.fetchRequest()
        
   
@@ -46,19 +47,20 @@ class Registration: UIViewController {
             print(error.localizedDescription)
         }
         
-        for i in 0...(tableItems.count)-1 {
-            if fieldRegistrationLogin.text == tableItems[i].login  {
+        for i in tableItems {
+            if self.fieldRegistrationLogin.text == i.login  {
                 
                 regBool = true
+                
             }
-print(tableItems[i].login!)
-            print(regBool)
+        //    print(regBool)
         }
         
         if regBool != true {
         
         do {
-            let tableObject = Table(context: context)
+         //   let tableObject = Table(context: context)
+           
             tableObject.name = fieldRegistrationName.text
             tableObject.email = fieldRegistrationEmail.text
             tableObject.login = fieldRegistrationLogin.text
@@ -75,12 +77,6 @@ print(tableItems[i].login!)
         
         }
 
-   /*
-        print(tableObject.name!)
-        print(tableObject.email!)
-        print(tableObject.login!)
-        print(tableObject.pass!)
- */
         
         
     }
@@ -98,13 +94,12 @@ print(tableItems[i].login!)
        
         
         //вывод данных
-    /*
-        for i in 0...(tableItems.count)-1 {
-       let str = tableItems[i]
-        print(str.name!)
-        print(str.email!)
-        print(str.login!)
-        print(str.pass!)
+  /*
+        for i in tableItems {
+        print(i.name!)
+        print(i.email!)
+        print(i.login!)
+        print(i.pass!)
         }
 */
     }

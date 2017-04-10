@@ -36,26 +36,28 @@ class ViewController: UIViewController {
     
         var passTmp: String = ""
         var autBool: Bool = false
-
+        
         let appDelegate = UIApplication.shared.delegate as! AppDelegate
         let context = appDelegate.persistentContainer.viewContext
-        
+  //      let entity = NSEntityDescription.entity(forEntityName: "Table", in: context)
+   //     let tableObject = NSManagedObject(entity: entity!, insertInto: context) as! Table
+
         let fetchRequest: NSFetchRequest<Table> = Table.fetchRequest()
       //  fetchRequest.predicate = NSPredicate(format: "login == %@", (fieldAuthorizationLogin.text)!)
         fetchRequest.returnsObjectsAsFaults = false
      
-    //   let tableObject = Table(context: context)
-        
+            
         do {
             tableItems = try context.fetch(fetchRequest)
-           
+            
         } catch {
             print(error.localizedDescription)
         }
         
-        for i in 0...(tableItems.count)-1 {
-            if fieldAuthorizationLogin.text == (tableItems[i].login)!  {
-                passTmp = (tableItems[i].pass)!
+        
+        for j in tableItems {
+            if fieldAuthorizationLogin.text == j.login! {
+               passTmp = (j.pass)!
                 autBool = true
             }
         }
