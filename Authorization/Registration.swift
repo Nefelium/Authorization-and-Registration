@@ -13,7 +13,6 @@ import CoreData
 class Registration: UIViewController {
     
     var tableItems: [Table] = []
-    
 
     @IBOutlet var fieldRegistrationName: UITextField!
 
@@ -48,19 +47,15 @@ class Registration: UIViewController {
         }
         
         for i in tableItems {
-            if self.fieldRegistrationLogin.text == i.login  {
-                
+            if (self.fieldRegistrationLogin.text == i.login) && (self.fieldRegistrationLogin.text != nil) {
                 regBool = true
-                
             }
-        //    print(regBool)
+        
         }
         
         if regBool != true {
         
         do {
-         //   let tableObject = Table(context: context)
-           
             tableObject.name = fieldRegistrationName.text
             tableObject.email = fieldRegistrationEmail.text
             tableObject.login = fieldRegistrationLogin.text
@@ -76,8 +71,6 @@ class Registration: UIViewController {
         } else {labelRegistrationResult.text = "Account already exists."
         
         }
-
-        
         
     }
 
@@ -91,22 +84,10 @@ class Registration: UIViewController {
             print(error.localizedDescription)
         }
     
-       
-        
-        //вывод данных
-  /*
-        for i in tableItems {
-        print(i.name!)
-        print(i.email!)
-        print(i.login!)
-        print(i.pass!)
-        }
-*/
+
     }
     
     override func viewDidLoad() {
-        
-        
         
     }
     
